@@ -73,7 +73,14 @@ if (authResult.IsSuccess)
                         .Title("[green]Prototipos[/]")
                         .AddChoices("Ver prototipos", "Agregar prototipo", "Volver"));
                 if (prototiposOption == "Volver") continue;
-                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {prototiposOption}[/]");
+                if (prototiposOption == "Ver prototipos")
+                {
+                    lapem_sid_cli.features.configuracion.prototipos.ViewPrototipos.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {prototiposOption}[/]");
+                }
                 break;
             case "Normas":
                 var normasOption = AnsiConsole.Prompt(

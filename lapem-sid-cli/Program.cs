@@ -88,7 +88,14 @@ if (authResult.IsSuccess)
                         .Title("[green]Normas[/]")
                         .AddChoices("Ver normas", "Agregar norma", "Volver"));
                 if (normasOption == "Volver") continue;
-                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {normasOption}[/]");
+                if (normasOption == "Ver normas")
+                {
+                    lapem_sid_cli.features.configuracion.normas.ViewNormas.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {normasOption}[/]");
+                }
                 break;
             case "Pruebas":
                 var pruebasOption = AnsiConsole.Prompt(

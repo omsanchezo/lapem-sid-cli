@@ -57,9 +57,15 @@ if (authResult.IsSuccess)
                     new SelectionPrompt<string>()
                         .Title("[green]Instrumentos[/]")
                         .AddChoices("Ver instrumentos", "Agregar instrumento", "Volver"));
-                // Aquí puedes llamar a la lógica correspondiente
                 if (instrumentosOption == "Volver") continue;
-                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {instrumentosOption}[/]");
+                if (instrumentosOption == "Ver instrumentos")
+                {
+                    lapem_sid_cli.features.configuracion.instrumentos.ViewInstrumentos.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {instrumentosOption}[/]");
+                }
                 break;
             case "Prototipos":
                 var prototiposOption = AnsiConsole.Prompt(

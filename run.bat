@@ -1,0 +1,1 @@
+dotnet run --project lapem-sid-cli/lapem-sid-cli.csproj

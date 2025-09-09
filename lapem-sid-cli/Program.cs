@@ -17,8 +17,22 @@ var password = AnsiConsole.Prompt(
         .PromptStyle("red")
         .Secret());
 
-// Enviar comando de autenticación
+// Enviar comando de autenticación con indicador de espera
 var command = new AuthenticateUser.Command(usuario, password);
-var authResult = await mediator.Send(command);
+var authResult = await AnsiConsole.Status()
+    .Spinner(Spinner.Known.Dots)
+    .SpinnerStyle(Style.Parse("green"))
+    .StartAsync("Validando credenciales...", async ctx =>
+    {
+        return await mediator.Send(command);
+    });
 
 // Simulación de obtención de token
+if (authResult.IsSuccess)
+{
+    AnsiConsole.MarkupLine("[bold green]Autenticación exitosa![/]");
+}
+else
+{
+    AnsiConsole.MarkupLine($"[bold red]Error de autenticación:[/] {authResult.Errors[0].Message}");
+}

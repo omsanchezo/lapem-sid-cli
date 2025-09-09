@@ -19,8 +19,6 @@ var password = AnsiConsole.Prompt(
 
 // Enviar comando de autenticación
 var command = new AuthenticateUser.Command(usuario, password);
-await mediator.Send(command);
+var authResult = await mediator.Send(command);
 
 // Simulación de obtención de token
-var token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-AnsiConsole.MarkupLine($"[green]Token de acceso:[/] {token}");

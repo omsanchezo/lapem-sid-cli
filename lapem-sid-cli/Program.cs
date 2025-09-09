@@ -28,9 +28,74 @@ var authResult = await AnsiConsole.Status()
     });
 
 // Simulación de obtención de token
+
 if (authResult.IsSuccess)
 {
     AnsiConsole.MarkupLine("[bold green]Autenticación exitosa![/]");
+
+    while (true)
+    {
+        var mainOption = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("[bold yellow]Seleccione una opción:[/]")
+                .AddChoices(new[] {
+                    "Instrumentos",
+                    "Prototipos",
+                    "Normas",
+                    "Pruebas",
+                    "Productos",
+                    "Salir"
+                }));
+
+        if (mainOption == "Salir")
+            break;
+
+        switch (mainOption)
+        {
+            case "Instrumentos":
+                var instrumentosOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Instrumentos[/]")
+                        .AddChoices("Ver instrumentos", "Agregar instrumento", "Volver"));
+                // Aquí puedes llamar a la lógica correspondiente
+                if (instrumentosOption == "Volver") continue;
+                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {instrumentosOption}[/]");
+                break;
+            case "Prototipos":
+                var prototiposOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Prototipos[/]")
+                        .AddChoices("Ver prototipos", "Agregar prototipo", "Volver"));
+                if (prototiposOption == "Volver") continue;
+                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {prototiposOption}[/]");
+                break;
+            case "Normas":
+                var normasOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Normas[/]")
+                        .AddChoices("Ver normas", "Agregar norma", "Volver"));
+                if (normasOption == "Volver") continue;
+                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {normasOption}[/]");
+                break;
+            case "Pruebas":
+                var pruebasOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Pruebas[/]")
+                        .AddChoices("Ver pruebas", "Agregar prueba", "Volver"));
+                if (pruebasOption == "Volver") continue;
+                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {pruebasOption}[/]");
+                break;
+            case "Productos":
+                var productosOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Productos[/]")
+                        .AddChoices("Ver productos", "Agregar producto", "Volver"));
+                if (productosOption == "Volver") continue;
+                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {productosOption}[/]");
+                break;
+        }
+    }
+    AnsiConsole.MarkupLine("[bold blue]¡Hasta luego![/]");
 }
 else
 {

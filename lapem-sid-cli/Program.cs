@@ -46,6 +46,7 @@ if (authResult.IsSuccess)
                     "Productos",
                     "Valores de Referencia",
                     "Contratos",
+                    "Orden de Fabricación",
                     "Salir"
                 }));
 
@@ -157,6 +158,21 @@ if (authResult.IsSuccess)
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {contratosOptions}[/]");
+                }
+                break;
+            case "Orden de Fabricación":
+                var ordenFabricacionOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Orden de Fabricación[/]")
+                        .AddChoices("Ver orden por ID", "Agregar orden de fabricación", "Volver"));
+                if (ordenFabricacionOption == "Volver") continue;
+                if (ordenFabricacionOption == "Ver orden por ID")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.ordenesfabricacion.ViewOrdenFabricacionById.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {ordenFabricacionOption}[/]");
                 }
                 break;
         }

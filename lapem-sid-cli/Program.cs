@@ -45,6 +45,7 @@ if (authResult.IsSuccess)
                     "Pruebas",
                     "Productos",
                     "Valores de Referencia",
+                    "Contratos",
                     "Salir"
                 }));
 
@@ -141,6 +142,21 @@ if (authResult.IsSuccess)
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {valoresOption}[/]");
+                }
+                break;
+            case "Contratos":
+                var contratosOptions = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                    .Title("[green]Contratos[/]")
+                        .AddChoices("Ver contratos", "Agregar contrato", "Volver"));
+                if (contratosOptions == "Volver") continue;
+                if (contratosOptions == "Ver contratos")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.contratos.ViewContratos.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {contratosOptions}[/]");
                 }
                 break;
         }

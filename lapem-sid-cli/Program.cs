@@ -105,6 +105,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.configuracion.normas.ViewNormas.Show(authResult.Value);
                 }
+                else if (normasOption == "Agregar norma")
+                {
+                    lapem_sid_cli.features.configuracion.normas.AddNorma.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {normasOption}[/]");

@@ -33,4 +33,39 @@ public class PrototiposRepository(AuthResult auth)
             return Result.Fail<List<Prototipo>>(ex.Message);
         }
     }
+
+    public Result<Prototipo> Create(string request)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Prototipo";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+            var response = httpClient.PostAsync(url, content).Result;
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<Prototipo>($"Error al crear prototipo: {response.StatusCode}. Detalles: {errorContent}");
+            }
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var prototipoCreado = Newtonsoft.Json.JsonConvert.DeserializeObject<Prototipo>(request);
+
+            if (prototipoCreado == null)
+            {
+                return Result.Fail<Prototipo>("No se pudo deserializar la respuesta del servidor");
+            }
+
+            return Result.Ok(prototipoCreado);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Prototipo>(ex.Message);
+        }
+    }
 }

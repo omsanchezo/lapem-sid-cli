@@ -2,6 +2,7 @@
 using Spectre.Console;
 using MediatR;
 using lapem_sid_cli.features.auth;
+using System.Runtime.Serialization;
 
 // Configuración de DI y MediatR
 var services = new ServiceCollection();
@@ -84,6 +85,10 @@ if (authResult.IsSuccess)
                 if (prototiposOption == "Ver prototipos")
                 {
                     lapem_sid_cli.features.configuracion.prototipos.ViewPrototipos.Show(authResult.Value);
+                }
+                else if (prototiposOption == "Agregar prototipo")
+                {
+                    lapem_sid_cli.features.configuracion.prototipos.AddPrototipo.Show(authResult.Value);
                 }
                 else
                 {

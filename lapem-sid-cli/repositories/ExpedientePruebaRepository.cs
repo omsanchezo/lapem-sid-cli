@@ -39,4 +39,35 @@ public class ExpedientePruebaRepository(AuthResult auth)
             return Result.Fail<List<ExpedientePrueba>>(ex.Message);
         }
     }
+
+    public Result<ExpedientePrueba> GetByExpediente(string expedienteValue)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = $"https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/ExpedientePruebas/{expedienteValue}";
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var response = httpClient.GetAsync(url).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                return Result.Fail<ExpedientePrueba>($"Error al obtener el expediente de prueba: {response.StatusCode}");
+            }
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var expedientes = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExpedientePrueba>>(responseBody);
+
+            if (expedientes == null || expedientes.Count == 0)
+            {
+                return Result.Fail<ExpedientePrueba>($"No se encontró el expediente {expedienteValue}");
+            }
+
+            return Result.Ok(expedientes[0]);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<ExpedientePrueba>(ex.Message);
+        }
+    }
 }

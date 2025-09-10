@@ -47,6 +47,7 @@ if (authResult.IsSuccess)
                     "Valores de Referencia",
                     "Contratos",
                     "Orden de Fabricación",
+                    "Expedientes de Prueba",
                     "Salir"
                 }));
 
@@ -173,6 +174,21 @@ if (authResult.IsSuccess)
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {ordenFabricacionOption}[/]");
+                }
+                break;
+            case "Expedientes de Prueba":
+                var expedientesOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Expedientes de Prueba[/]")
+                        .AddChoices("Ver expedientes de prueba", "Agregar expediente de prueba", "Volver"));
+                if (expedientesOption == "Volver") continue;
+                if (expedientesOption == "Ver expedientes de prueba")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.expedientesprueba.ViewExpedientesPrueba.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {expedientesOption}[/]");
                 }
                 break;
         }

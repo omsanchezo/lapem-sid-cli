@@ -4,7 +4,7 @@ using lapem_sid_cli.models;
 using lapem_sid_cli.repositories;
 using lapem_sid_cli.features.auth;
 
-namespace lapem_sid_cli.features.configuracion.ValoresReferencia
+namespace lapem_sid_cli.features.configuracion.valoresReferencia
 {
     public class AddValorReferencia
     {

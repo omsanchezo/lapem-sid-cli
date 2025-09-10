@@ -3,7 +3,7 @@ using lapem_sid_cli.repositories;
 using lapem_sid_cli.features.auth;
 using lapem_sid_cli.models;
 
-namespace lapem_sid_cli.features.configuracion.ValoresReferencia;
+namespace lapem_sid_cli.features.configuracion.valoresReferencia;
 
 public class ViewValorReferencia(AuthResult auth)
 {

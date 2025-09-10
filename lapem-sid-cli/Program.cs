@@ -136,7 +136,7 @@ if (authResult.IsSuccess)
                 if (valoresOption == "Volver") continue;
                 if (valoresOption == "Ver valores de referencia")
                 {
-                    lapem_sid_cli.features.configuracion.ValoresReferencia.ViewValorReferencia.Show(authResult.Value);
+                    lapem_sid_cli.features.configuracion.valoresReferencia.ViewValorReferencia.Show(authResult.Value);
                 }
                 else
                 {

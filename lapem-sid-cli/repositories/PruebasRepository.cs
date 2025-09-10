@@ -1,3 +1,4 @@
+using FluentResults;
 using lapem_sid_cli.features.auth;
 using lapem_sid_cli.models;
 
@@ -30,6 +31,41 @@ public class PruebasRepository(AuthResult auth)
         catch (Exception ex)
         {
             return FluentResults.Result.Fail<List<Prueba>>(ex.Message);
+        }
+    }
+
+    public Result<Prueba> Create(string request)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Prueba";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PostAsync(url, content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<Prueba>($"Error al crear prueba: {errorContent}");
+            }
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var pruebaCreada = Newtonsoft.Json.JsonConvert.DeserializeObject<Prueba>(request);
+
+            if (pruebaCreada == null)
+            {
+                return Result.Fail<Prueba>("Error al deserializar la respuesta de la prueba creada.");
+            }
+
+            return Result.Ok(pruebaCreada);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Prueba>(ex.Message);
         }
     }
 }

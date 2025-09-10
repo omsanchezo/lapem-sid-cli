@@ -124,6 +124,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.configuracion.pruebas.ViewPruebas.Show(authResult.Value);
                 }
+                else if (pruebasOption == "Agregar prueba")
+                {
+                    lapem_sid_cli.features.configuracion.pruebas.AddPrueba.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {pruebasOption}[/]");

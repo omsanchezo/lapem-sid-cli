@@ -16,4 +16,11 @@
     <PackageReference Include="Spectre.Console" Version="0.51.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="features\01configuracion\instrumentos\data\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>data\instrumentos\%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
 </Project>

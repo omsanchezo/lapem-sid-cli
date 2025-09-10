@@ -66,6 +66,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.configuracion.instrumentos.ViewInstrumentos.Show(authResult.Value);
                 }
+                else if (instrumentosOption == "Agregar instrumento")
+                {
+                    lapem_sid_cli.features.configuracion.instrumentos.AddInstrumento.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {instrumentosOption}[/]");

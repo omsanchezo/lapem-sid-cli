@@ -118,7 +118,14 @@ if (authResult.IsSuccess)
                         .Title("[green]Productos[/]")
                         .AddChoices("Ver productos", "Agregar producto", "Volver"));
                 if (productosOption == "Volver") continue;
-                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {productosOption}[/]");
+                if (productosOption == "Ver productos")
+                {
+                    lapem_sid_cli.features.configuracion.productos.ViewProductos.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {productosOption}[/]");
+                }
                 break;
         }
     }

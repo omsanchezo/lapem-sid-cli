@@ -143,6 +143,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.configuracion.productos.ViewProductos.Show(authResult.Value);
                 }
+                else if (productosOption == "Agregar producto")
+                {
+                    lapem_sid_cli.features.configuracion.productos.AddProducto.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {productosOption}[/]");

@@ -33,4 +33,39 @@ public class ProductosRepository(AuthResult auth)
             return Result.Fail<List<Producto>>(ex.Message);
         }
     }
+
+    public Result<Producto> Create(string request)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Producto";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PostAsync(url, content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<Producto>($"Error al crear producto: {errorContent}");
+            }
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var productoCreado = new Producto();
+
+            if (productoCreado == null)
+            {
+                return Result.Fail<Producto>("Error al deserializar el producto creado.");
+            }
+
+            return Result.Ok(productoCreado);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Producto>(ex.Message);
+        }
+    }
 }

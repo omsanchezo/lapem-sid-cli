@@ -1,0 +1,16 @@
+{
+    "id": "2",
+    "codigoFabricante": "PROD-02",
+    "descripcion": "Cable de Cobre THW-LS 600V Calibre 12 AWG",
+    "descripcionCorta": "TERMINAL P/CABLE DE POT CONECTAR A GIS",
+    "tipoFabricacion": "LOTE",
+    "unidad": "m",
+    "norma": "68c1dc01a5774cb410304609",
+    "prototipo": "68c1da13a5774cb410304601",
+    "estatus": "ACTIVO",
+    "fechaRegistro": "2025-09-09T18:09:29.066Z",
+    "pruebas": [
+      "68c1ddb4a5774cb41030460e",
+      "68c1de0ea5774cb410304611"
+    ]
+  }

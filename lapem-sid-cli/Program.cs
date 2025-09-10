@@ -44,6 +44,7 @@ if (authResult.IsSuccess)
                     "Normas",
                     "Pruebas",
                     "Productos",
+                    "Valores de Referencia",
                     "Salir"
                 }));
 
@@ -125,6 +126,21 @@ if (authResult.IsSuccess)
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {productosOption}[/]");
+                }
+                break;
+            case "Valores de Referencia":
+                var valoresOption = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Valores de Referencia[/]")
+                        .AddChoices("Ver valores de referencia", "Agregar valor de referencia", "Volver"));
+                if (valoresOption == "Volver") continue;
+                if (valoresOption == "Ver valores de referencia")
+                {
+                    lapem_sid_cli.features.configuracion.ValoresReferencia.ViewValorReferencia.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {valoresOption}[/]");
                 }
                 break;
         }

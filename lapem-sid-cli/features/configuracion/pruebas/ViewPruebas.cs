@@ -1,3 +1,4 @@
+using lapem_sid_cli.features.auth;
 using lapem_sid_cli.models;
 using lapem_sid_cli.repositories;
 using Spectre.Console;
@@ -6,7 +7,7 @@ namespace lapem_sid_cli.features.configuracion.pruebas;
 
 public class ViewPruebas
 {
-    public static void Show(lapem_sid_cli.features.auth.AuthResult auth)
+    public static void Show(AuthResult auth)
     {
         var repo = new PruebasRepository(auth);
         var result = repo.GetAll();

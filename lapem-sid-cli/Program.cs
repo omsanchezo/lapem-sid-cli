@@ -103,7 +103,14 @@ if (authResult.IsSuccess)
                         .Title("[green]Pruebas[/]")
                         .AddChoices("Ver pruebas", "Agregar prueba", "Volver"));
                 if (pruebasOption == "Volver") continue;
-                AnsiConsole.MarkupLine($"[italic]Seleccionaste: {pruebasOption}[/]");
+                if (pruebasOption == "Ver pruebas")
+                {
+                    lapem_sid_cli.features.configuracion.pruebas.ViewPruebas.Show(authResult.Value);
+                }
+                else
+                {
+                    AnsiConsole.MarkupLine($"[italic]Seleccionaste: {pruebasOption}[/]");
+                }
                 break;
             case "Productos":
                 var productosOption = AnsiConsole.Prompt(

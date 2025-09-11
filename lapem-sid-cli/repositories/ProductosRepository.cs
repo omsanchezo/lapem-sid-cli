@@ -34,6 +34,30 @@ public class ProductosRepository(AuthResult auth)
         }
     }
 
+    public Result<Producto> GetById(string id)
+    {
+        try
+        {
+            var allProducts = this.GetAll();
+            if (allProducts.IsFailed)
+            {
+                return Result.Fail<Producto>(allProducts.Errors.First().Message);
+            }
+
+            var producto = allProducts.Value.FirstOrDefault(p => p.Id == id);
+            if (producto == null)
+            {
+                return Result.Fail<Producto>("Producto no encontrado.");
+            }
+
+            return Result.Ok(producto);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Producto>(ex.Message);
+        }
+    }
+
     public Result<Producto> Create(string request)
     {
         try

@@ -28,11 +28,11 @@ public class ViewProductos
             .AddColumn("ID")
             .AddColumn("Código Fabricante")
             .AddColumn("Descripción")
-            .AddColumn("Descripción Corta")
+            //.AddColumn("Descripción Corta")
             .AddColumn("Tipo Fabricación")
             .AddColumn("Unidad")
-            .AddColumn("Norma - Clave")
-            .AddColumn("Norma - Nombre")
+            //.AddColumn("Norma - Clave")
+            //.AddColumn("Norma - Nombre")
             .AddColumn("Prototipo - Número")
             .AddColumn("Estatus")
             .AddColumn("Fecha Registro");
@@ -43,11 +43,11 @@ public class ViewProductos
                 prod.Id ?? "",
                 prod.CodigoFabricante ?? "",
                 prod.Descripcion ?? "",
-                prod.DescripcionCorta ?? "",
+                //prod.DescripcionCorta ?? "",
                 prod.TipoFabricacion ?? "",
                 prod.Unidad ?? "",
-                prod.Norma?.Clave ?? "",
-                prod.Norma?.Nombre ?? "",
+                //prod.Norma?.Clave ?? "",
+                //prod.Norma?.Nombre ?? "",
                 prod.Prototipo?.Numero ?? "",
                 prod.Estatus ?? "",
                 prod.FechaRegistro?.ToString("yyyy-MM-dd") ?? ""

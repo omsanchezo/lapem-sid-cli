@@ -137,11 +137,15 @@ if (authResult.IsSuccess)
                 var productosOption = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("[green]Productos[/]")
-                        .AddChoices("Ver productos", "Agregar producto", "Volver"));
+                        .AddChoices("Ver productos", "Ver un producto", "Agregar producto", "Volver"));
                 if (productosOption == "Volver") continue;
                 if (productosOption == "Ver productos")
                 {
                     lapem_sid_cli.features.configuracion.productos.ViewProductos.Show(authResult.Value);
+                }
+                else if (productosOption == "Ver un producto")
+                {
+                    lapem_sid_cli.features.configuracion.productos.ViewProductoById.Show(authResult.Value);
                 }
                 else if (productosOption == "Agregar producto")
                 {

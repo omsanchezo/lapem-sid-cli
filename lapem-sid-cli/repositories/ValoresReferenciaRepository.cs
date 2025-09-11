@@ -4,14 +4,9 @@ using lapem_sid_cli.models;
 
 namespace lapem_sid_cli.repositories;
 
-public class ValoresRefenciaRepository
+public class ValoresReferenciaRepository(AuthResult auth)
 {
-    private readonly AuthResult _auth;
-
-    public ValoresRefenciaRepository(AuthResult auth)
-    {
-        _auth = auth;
-    }
+    private readonly AuthResult _auth = auth;
 
     public Result<List<ValorReferencia>> GetAll()
     {
@@ -29,8 +24,8 @@ public class ValoresRefenciaRepository
             }
 
             var responseBody = response.Content.ReadAsStringAsync().Result;
-            var valores = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ValorReferencia>>(responseBody);
-            return Result.Ok(valores ?? new List<ValorReferencia>());
+            var valoresReferencia = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ValorReferencia>>(responseBody);
+            return Result.Ok(valoresReferencia ?? new List<ValorReferencia>());
         }
         catch (Exception ex)
         {
@@ -57,7 +52,6 @@ public class ValoresRefenciaRepository
                 return Result.Fail<ValorReferencia>($"Error al crear valor de referencia: {errorContent}");
             }
 
-            var responseBody = response.Content.ReadAsStringAsync().Result;
             var valorCreado = Newtonsoft.Json.JsonConvert.DeserializeObject<ValorReferencia>(request);
 
             if (valorCreado == null)

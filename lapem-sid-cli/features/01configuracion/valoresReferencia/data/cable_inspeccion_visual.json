@@ -1,10 +1,10 @@
 {
     "id": "",
     "idProducto": "68c2f8005006ea4012083858",
-    "idPrueba": "68c2f2235006ea4012083825",
-    "valor": 0.206,
+    "idPrueba": "68c2f2165006ea4012083823",
+    "valor": 0,
     "valor2": 0,
-    "unidad": "Ohm/km",
-    "comparacion": "VALOR_MAXIMO",
+    "unidad": "adimensional",
+    "comparacion": "NO_COMPARAR",
     "fechaRegistro": "2025-09-09T18:20:56.495Z"
   }

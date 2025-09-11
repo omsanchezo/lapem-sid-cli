@@ -166,6 +166,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.configuracion.valoresReferencia.ViewValorReferencia.Show(authResult.Value);
                 }
+                else if (valoresOption == "Agregar valor de referencia")
+                {
+                    lapem_sid_cli.features.configuracion.valoresReferencia.AddValorReferencia.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {valoresOption}[/]");

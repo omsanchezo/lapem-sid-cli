@@ -14,7 +14,7 @@ public class ExpedientePruebaRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/ExpedientePruebas?pageNumber=1&pageSize=20";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/ExpedientePruebas?pageNumber=1&pageSize=20";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -45,7 +45,7 @@ public class ExpedientePruebaRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = $"https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/ExpedientePruebas/{expedienteValue}";
+            var url = $"https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/ExpedientePruebas/{expedienteValue}";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -89,7 +89,7 @@ public class ExpedientePruebaRepository(AuthResult auth)
             // }
 
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/ExpedientePruebas";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/ExpedientePruebas";
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
@@ -117,7 +117,7 @@ public class ExpedientePruebaRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = $"https://lapem.cfe.gob.mx/sid_capacitacion/F3_Pruebas/AgregaResultadoPrueba?expediente={expediente}&muestra={muestra}";
+            var url = $"https://lapem.cfe.gob.mx/sid_evaluacion/F3_Pruebas/AgregaResultadoPrueba?expediente={expediente}&muestra={muestra}";
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "text/plain");

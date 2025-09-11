@@ -14,7 +14,7 @@ public class ContratosRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/Contratos?pageNumber=1&pageSize=20";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/Contratos?pageNumber=1&pageSize=20";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -69,7 +69,7 @@ public class ContratosRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/Contratos";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/Contratos";
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");

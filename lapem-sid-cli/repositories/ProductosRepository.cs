@@ -14,7 +14,7 @@ public class ProductosRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Producto";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F1_ConfiguracionInicial/Producto";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -104,7 +104,7 @@ public class ProductosRepository(AuthResult auth)
             }
 
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Producto";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F1_ConfiguracionInicial/Producto";
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");

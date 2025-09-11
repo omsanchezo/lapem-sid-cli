@@ -14,7 +14,7 @@ public class OrdenFabricacionRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = $"https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/OrdenFabricacion/{id}";
+            var url = $"https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/OrdenFabricacion/{id}";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -80,7 +80,7 @@ public class OrdenFabricacionRepository(AuthResult auth)
             }
 
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/OrdenFabricacion";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F2_PreparacionFabricacion/OrdenFabricacion";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 

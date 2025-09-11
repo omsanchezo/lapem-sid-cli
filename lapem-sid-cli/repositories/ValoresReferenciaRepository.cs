@@ -13,7 +13,7 @@ public class ValoresReferenciaRepository(AuthResult auth)
         try
         {
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/ValorReferencia";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F1_ConfiguracionInicial/ValorReferencia";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
 
@@ -82,7 +82,7 @@ public class ValoresReferenciaRepository(AuthResult auth)
                 valorCreado.Prueba = pruebaResult.Value;
 
             using var httpClient = new HttpClient();
-            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/ValorReferencia";
+            var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F1_ConfiguracionInicial/ValorReferencia";
 
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");

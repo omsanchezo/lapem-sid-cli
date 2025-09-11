@@ -25,7 +25,7 @@ public static class AuthenticateUser
             try
             {
                 using var httpClient = new HttpClient();
-                var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F0_Acceso/Login";
+                var url = "https://lapem.cfe.gob.mx/sid_evaluacion/F0_Acceso/Login";
                 var payload = new
                 {
                     username = command.Username,

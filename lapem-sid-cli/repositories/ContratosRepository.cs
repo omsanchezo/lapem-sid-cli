@@ -40,6 +40,30 @@ public class ContratosRepository(AuthResult auth)
         }
     }
 
+    public Result<Contrato> GetById(string id)
+    {
+        try
+        {
+            var allContratos = this.GetAll();
+            if (allContratos.IsFailed)
+            {
+                return Result.Fail<Contrato>(allContratos.Errors.First().Message);
+            }
+
+            var contrato = allContratos.Value.FirstOrDefault(c => c.Id == id);
+            if (contrato == null)
+            {
+                return Result.Fail<Contrato>("Contrato no encontrado.");
+            }
+
+            return Result.Ok(contrato);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Contrato>(ex.Message);
+        }
+    }
+
     public Result<Contrato> Create(string request)
     {
         try

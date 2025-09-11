@@ -1,0 +1,35 @@
+{
+  "id": "",
+  "claveOrdenFabricacion": "OF-2025-CFE-8900",
+  "loteFabricacion": "AD00706098",
+  "idProducto": "68c2f8005006ea4012083858",
+  "detalleFabricacion": [
+    {
+      "contratoId": "68c302bb5006ea40120838b0",
+      "tipoContrato": "ContratoCFE",
+      "partidaContratoId": "838",
+      "descripcionPartida": "CABLE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+      "unidad": "kg",
+      "cantidadOriginalContrato": 400,
+      "cantidadAFabricar": 400
+    },
+    {
+      "contratoId": "68c302bb5006ea40120838b0",
+      "tipoContrato": "ContratoCFE",
+      "partidaContratoId": "864",
+      "descripcionPartida": "CABLE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+      "unidad": "kg",
+      "cantidadOriginalContrato": 838,
+      "cantidadAFabricar": 838
+    },
+    {
+      "contratoId": "68c302eb5006ea40120838b2",
+      "tipoContrato": "ContratoParticular",
+      "partidaContratoId": "1",
+      "descripcionPartida": "CABLE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+      "unidad": "kg",
+      "cantidadOriginalContrato": 200,
+      "cantidadAFabricar": 200
+    }
+  ]
+}

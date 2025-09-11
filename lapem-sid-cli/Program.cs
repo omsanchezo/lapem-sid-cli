@@ -179,11 +179,15 @@ if (authResult.IsSuccess)
                 var contratosOptions = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                     .Title("[green]Contratos[/]")
-                        .AddChoices("Ver contratos", "Agregar contrato", "Volver"));
+                        .AddChoices("Ver contratos", "Ver contrato por ID", "Agregar contrato", "Volver"));
                 if (contratosOptions == "Volver") continue;
                 if (contratosOptions == "Ver contratos")
                 {
                     lapem_sid_cli.features.preparacionfabricacion.contratos.ViewContratos.Show(authResult.Value);
+                }
+                else if (contratosOptions == "Ver contrato por ID")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.contratos.ViewContratoById.Show(authResult.Value);
                 }
                 else if (contratosOptions == "Agregar contrato")
                 {
@@ -203,6 +207,10 @@ if (authResult.IsSuccess)
                 if (ordenFabricacionOption == "Ver orden por ID")
                 {
                     lapem_sid_cli.features.preparacionfabricacion.ordenesfabricacion.ViewOrdenFabricacionById.Show(authResult.Value);
+                }
+                else if (ordenFabricacionOption == "Agregar orden de fabricación")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.ordenesfabricacion.AddOrdenFabricacion.Show(authResult.Value);
                 }
                 else
                 {

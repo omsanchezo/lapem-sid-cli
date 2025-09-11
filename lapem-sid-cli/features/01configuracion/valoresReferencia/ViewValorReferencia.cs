@@ -30,7 +30,9 @@ public class ViewValorReferencia(AuthResult auth)
         var table = new Table().Title("Valores Referencia");
         table.AddColumn("ID");
         table.AddColumn("IdProducto");
+        table.AddColumn("Producto");
         table.AddColumn("IdPrueba");
+        table.AddColumn("Prueba");
         table.AddColumn("Valor");
         table.AddColumn("Valor2");
         table.AddColumn("Unidad");
@@ -38,10 +40,14 @@ public class ViewValorReferencia(AuthResult auth)
         table.AddColumn("FechaRegistro");
         foreach (ValorReferencia v in valores)
         {
+            var producto = v.Producto != null ? $"{v.Producto.CodigoFabricante} - {v.Producto.Descripcion}" : "N/A";
+            var prueba = v.Prueba != null ? $"{v.Prueba.Nombre}" : "N/A";
             table.AddRow(
                 v.Id ?? "",
                 v.IdProducto ?? "",
+                producto,
                 v.IdPrueba ?? "",
+                prueba,
                 v.Valor?.ToString() ?? "",
                 v.Valor2?.ToString() ?? "",
                 v.Unidad ?? "",

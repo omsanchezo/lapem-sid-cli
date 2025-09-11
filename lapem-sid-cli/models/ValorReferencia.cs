@@ -10,4 +10,6 @@ public class ValorReferencia
     public string? Unidad { get; set; }
     public string? Comparacion { get; set; }
     public DateTime? FechaRegistro { get; set; }
+    public Producto? Producto { get; set; }
+    public Prueba? Prueba { get; set; }
 }

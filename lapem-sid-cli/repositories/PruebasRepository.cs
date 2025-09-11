@@ -34,6 +34,30 @@ public class PruebasRepository(AuthResult auth)
         }
     }
 
+    public FluentResults.Result<Prueba> GetById(string id)
+    {
+        try
+        {
+            var allPruebas = this.GetAll();
+            if (allPruebas.IsFailed)
+            {
+                return FluentResults.Result.Fail<Prueba>(allPruebas.Errors.First().Message);
+            }
+
+            var prueba = allPruebas.Value.FirstOrDefault(p => p.Id == id);
+            if (prueba == null)
+            {
+                return FluentResults.Result.Fail<Prueba>("Prueba no encontrada.");
+            }
+
+            return FluentResults.Result.Ok(prueba);
+        }
+        catch (Exception ex)
+        {
+            return FluentResults.Result.Fail<Prueba>(ex.Message);
+        }
+    }
+
     public Result<Prueba> Create(string request)
     {
         try

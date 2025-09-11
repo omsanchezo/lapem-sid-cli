@@ -111,4 +111,31 @@ public class ExpedientePruebaRepository(AuthResult auth)
             return Result.Fail<ExpedientePrueba>(ex.Message);
         }
     }
+
+    public Result<bool> AddResultadoPrueba(string expediente, string muestra, string request)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = $"https://lapem.cfe.gob.mx/sid_capacitacion/F3_Pruebas/AgregaResultadoPrueba?expediente={expediente}&muestra={muestra}";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "text/plain");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PutAsync(url, content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<bool>($"Error al agregar resultado de prueba: {errorContent}");
+            }
+
+            return Result.Ok(true);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<bool>(ex.Message);
+        }
+    }
 }

@@ -221,7 +221,7 @@ if (authResult.IsSuccess)
                 var expedientesOption = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("[green]Expedientes de Prueba[/]")
-                        .AddChoices("Ver expedientes de prueba", "Ver un expediente de prueba", "Agregar expediente de prueba", "Volver"));
+                        .AddChoices("Ver expedientes de prueba", "Ver un expediente de prueba", "Agregar expediente de prueba", "Registrar resultado prueba", "Volver"));
                 if (expedientesOption == "Volver") continue;
                 if (expedientesOption == "Ver expedientes de prueba")
                 {
@@ -234,6 +234,10 @@ if (authResult.IsSuccess)
                 else if (expedientesOption == "Agregar expediente de prueba")
                 {
                     lapem_sid_cli.features.preparacionfabricacion.expedientesprueba.AddExpedientePrueba.Show(authResult.Value);
+                }
+                else if (expedientesOption == "Registrar resultado prueba")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.expedientesprueba.AddResultadoPrueba.Show(authResult.Value);
                 }
                 else
                 {

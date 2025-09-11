@@ -29,8 +29,8 @@ public class ViewValorReferencia(AuthResult auth)
 
         var table = new Table().Title("Valores Referencia");
         table.AddColumn("ID");
-        table.AddColumn("IdProducto");
-        table.AddColumn("Producto");
+        //table.AddColumn("IdProducto");
+        //table.AddColumn("Producto");
         table.AddColumn("IdPrueba");
         table.AddColumn("Prueba");
         table.AddColumn("Valor");
@@ -44,8 +44,8 @@ public class ViewValorReferencia(AuthResult auth)
             var prueba = v.Prueba != null ? $"{v.Prueba.Nombre}" : "N/A";
             table.AddRow(
                 v.Id ?? "",
-                v.IdProducto ?? "",
-                producto,
+                //v.IdProducto ?? "",
+                //producto,
                 v.IdPrueba ?? "",
                 prueba,
                 v.Valor?.ToString() ?? "",

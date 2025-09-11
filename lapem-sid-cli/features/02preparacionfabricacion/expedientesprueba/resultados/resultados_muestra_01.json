@@ -1,0 +1,31 @@
+[{
+  "idPrueba": "68c2f2235006ea4012083825",
+  "idValorReferencia": "68c2f9f45006ea401208386e",
+  "fechaPrueba": "2025-09-11T18:40:13.619Z",
+  "operadorPrueba": "Oscar M",
+  "idInstrumentoMedicion": "68c2ef645006ea4012083813",
+  "valorMedido": 0.206,
+  "resultado": "SATISFACTORIO",
+  "numeroIntento": 1
+},
+{
+  "idPrueba": "68c2f2285006ea4012083826",
+  "idValorReferencia": "68c2fb645006ea4012083881",
+  "fechaPrueba": "2025-09-11T18:40:13.619Z",
+  "operadorPrueba": "Oscar M",
+  "idInstrumentoMedicion": "68c2ef595006ea4012083812",
+  "valorMedido": 0.308,
+  "resultado": "SATISFACTORIO",
+  "numeroIntento": 1
+},
+{
+  "idPrueba": "68c2f2165006ea4012083823",
+  "idValorReferencia": "68c2fb7a5006ea4012083883",
+  "fechaPrueba": "2025-09-11T18:40:13.619Z",
+  "operadorPrueba": "Oscar M",
+  "idInstrumentoMedicion": "68c2ef595006ea4012083812",
+  "valorMedido": 0,
+  "resultado": "SATISFACTORIO",
+  "numeroIntento": 1
+}
+]

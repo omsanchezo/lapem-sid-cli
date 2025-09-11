@@ -42,24 +42,32 @@ public class AddResultadoPrueba
             AnsiConsole.MarkupLine($"[blue]Archivo seleccionado: {selectedFile}[/]");
 
             var jsonContent = File.ReadAllText(filePath);
-            var resultadoPrueba = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultadoPruebaRequest>(jsonContent);
+            var resultadosPrueba = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ResultadoPruebaRequest>>(jsonContent);
 
-            if (resultadoPrueba == null)
+            if (resultadosPrueba == null || resultadosPrueba.Count == 0)
             {
-                AnsiConsole.MarkupLine("[red]Error: El archivo no contiene un resultado de prueba válido.[/]");
+                AnsiConsole.MarkupLine("[red]Error: El archivo no contiene resultados de prueba válidos.[/]");
                 return;
             }
 
-            // Mostrar y confirmar detalles del resultado
+            // Mostrar lista de resultados y permitir selección
+            var selectedResultado = AnsiConsole.Prompt(
+                new SelectionPrompt<ResultadoPruebaRequest>()
+                    .Title("[green]Seleccione el resultado de prueba a registrar:[/]")
+                    .PageSize(10)
+                    .UseConverter(r => $"Prueba: {r.IdPrueba}, Valor: {r.ValorMedido}, Fecha: {r.FechaPrueba:yyyy-MM-dd}")
+                    .AddChoices(resultadosPrueba));
+
+            // Mostrar y confirmar detalles del resultado seleccionado
             AnsiConsole.MarkupLine("[blue]Detalles del resultado de prueba:[/]");
-            AnsiConsole.MarkupLine($"ID Prueba: {resultadoPrueba.IdPrueba}");
-            AnsiConsole.MarkupLine($"ID Valor Referencia: {resultadoPrueba.IdValorReferencia}");
-            AnsiConsole.MarkupLine($"Fecha Prueba: {resultadoPrueba.FechaPrueba:yyyy-MM-dd}");
-            AnsiConsole.MarkupLine($"Operador: {resultadoPrueba.OperadorPrueba}");
-            AnsiConsole.MarkupLine($"ID Instrumento: {resultadoPrueba.IdInstrumentoMedicion}");
-            AnsiConsole.MarkupLine($"Valor Medido: {resultadoPrueba.ValorMedido}");
-            AnsiConsole.MarkupLine($"Resultado: {resultadoPrueba.Resultado}");
-            AnsiConsole.MarkupLine($"Número de Intento: {resultadoPrueba.NumeroIntento}");
+            AnsiConsole.MarkupLine($"ID Prueba: {selectedResultado.IdPrueba}");
+            AnsiConsole.MarkupLine($"ID Valor Referencia: {selectedResultado.IdValorReferencia}");
+            AnsiConsole.MarkupLine($"Fecha Prueba: {selectedResultado.FechaPrueba:yyyy-MM-dd}");
+            AnsiConsole.MarkupLine($"Operador: {selectedResultado.OperadorPrueba}");
+            AnsiConsole.MarkupLine($"ID Instrumento: {selectedResultado.IdInstrumentoMedicion}");
+            AnsiConsole.MarkupLine($"Valor Medido: {selectedResultado.ValorMedido}");
+            AnsiConsole.MarkupLine($"Resultado: {selectedResultado.Resultado}");
+            AnsiConsole.MarkupLine($"Número de Intento: {selectedResultado.NumeroIntento}");
 
             if (!AnsiConsole.Confirm("[yellow]¿Los detalles son correctos?[/]"))
             {
@@ -80,7 +88,7 @@ public class AddResultadoPrueba
             AnsiConsole.MarkupLine("[blue]Enviando resultado de prueba al servidor...[/]");
 
             var repo = new ExpedientePruebaRepository(auth);
-            var jsonRequest = Newtonsoft.Json.JsonConvert.SerializeObject(resultadoPrueba);
+            var jsonRequest = Newtonsoft.Json.JsonConvert.SerializeObject(selectedResultado);
             var result = repo.AddResultadoPrueba(expediente, muestra, jsonRequest);
 
             if (result.IsFailed)
@@ -97,14 +105,14 @@ public class AddResultadoPrueba
 
             table.AddRow("Expediente", expediente)
                  .AddRow("Muestra", muestra)
-                 .AddRow("ID Prueba", resultadoPrueba.IdPrueba ?? "-")
-                 .AddRow("ID Valor Referencia", resultadoPrueba.IdValorReferencia ?? "-")
-                 .AddRow("Fecha Prueba", resultadoPrueba.FechaPrueba.ToString("yyyy-MM-dd HH:mm:ss"))
-                 .AddRow("Operador", resultadoPrueba.OperadorPrueba ?? "-")
-                 .AddRow("Instrumento", resultadoPrueba.IdInstrumentoMedicion ?? "-")
-                 .AddRow("Valor Medido", resultadoPrueba.ValorMedido.ToString("N2"))
-                 .AddRow("Resultado", resultadoPrueba.Resultado ?? "-")
-                 .AddRow("Intento", resultadoPrueba.NumeroIntento.ToString());
+                 .AddRow("ID Prueba", selectedResultado.IdPrueba ?? "-")
+                 .AddRow("ID Valor Referencia", selectedResultado.IdValorReferencia ?? "-")
+                 .AddRow("Fecha Prueba", selectedResultado.FechaPrueba.ToString("yyyy-MM-dd HH:mm:ss"))
+                 .AddRow("Operador", selectedResultado.OperadorPrueba ?? "-")
+                 .AddRow("Instrumento", selectedResultado.IdInstrumentoMedicion ?? "-")
+                 .AddRow("Valor Medido", selectedResultado.ValorMedido.ToString("N2"))
+                 .AddRow("Resultado", selectedResultado.Resultado ?? "-")
+                 .AddRow("Intento", selectedResultado.NumeroIntento.ToString());
 
             AnsiConsole.Write(table);
         }

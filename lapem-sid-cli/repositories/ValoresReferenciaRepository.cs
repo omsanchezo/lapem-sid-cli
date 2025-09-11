@@ -62,6 +62,25 @@ public class ValoresReferenciaRepository(AuthResult auth)
     {
         try
         {
+            var valorCreado = Newtonsoft.Json.JsonConvert.DeserializeObject<ValorReferencia>(request);
+            if (valorCreado == null)
+                return Result.Fail<ValorReferencia>("Error al deserializar el valor de referencia creado.");
+
+            var productosRepo = new ProductosRepository(_auth);
+            if (string.IsNullOrEmpty(valorCreado.IdProducto))
+                return Result.Fail<ValorReferencia>("El IdProducto es obligatorio.");
+
+            var productoResult = productosRepo.GetById(valorCreado.IdProducto);
+            if (productoResult.IsSuccess)
+                valorCreado.Producto = productoResult.Value;
+
+            var pruebasRepo = new PruebasRepository(_auth);
+            if (string.IsNullOrEmpty(valorCreado.IdPrueba))
+                return Result.Fail<ValorReferencia>("El IdPrueba es obligatorio.");
+            var pruebaResult = pruebasRepo.GetById(valorCreado.IdPrueba);
+            if (pruebaResult.IsSuccess)
+                valorCreado.Prueba = pruebaResult.Value;
+
             using var httpClient = new HttpClient();
             var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/ValorReferencia";
 
@@ -77,12 +96,6 @@ public class ValoresReferenciaRepository(AuthResult auth)
                 return Result.Fail<ValorReferencia>($"Error al crear valor de referencia: {errorContent}");
             }
 
-            var valorCreado = Newtonsoft.Json.JsonConvert.DeserializeObject<ValorReferencia>(request);
-
-            if (valorCreado == null)
-            {
-                return Result.Fail<ValorReferencia>("Error al deserializar el valor de referencia creado.");
-            }
 
             return Result.Ok(valorCreado);
         }

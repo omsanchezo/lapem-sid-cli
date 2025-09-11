@@ -83,16 +83,18 @@ public class OrdenFabricacionRepository(AuthResult auth)
             var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/OrdenFabricacion";
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
             httpClient.DefaultRequestHeaders.Add("accept", "*/*");
-            httpClient.DefaultRequestHeaders.Add("Content-Type", "application/json");
 
             var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
             var response = httpClient.PostAsync(url, content).Result;
 
             if (!response.IsSuccessStatusCode)
             {
-                return Result.Fail<OrdenFabricacion>($"Error al crear la orden de fabricación: {response.StatusCode}");
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<OrdenFabricacion>($"Error al crear la orden de fabricación: {errorContent}");
             }
 
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(responseBody);
             return Result.Ok(orden);
         }
         catch (Exception ex)

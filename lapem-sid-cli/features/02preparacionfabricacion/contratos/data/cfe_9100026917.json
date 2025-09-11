@@ -1,0 +1,28 @@
+{
+    "$Tipo": "ContratoCFE",
+    "id": "",
+    "tipoContrato": "ContratoCFE",
+    "noContrato": "9100026917",
+    "estatus": "ACTIVO",
+    "detalleContrato" : [
+        {
+            "partidaContrato" : "838",
+            "descripcionAviso" : "CABLE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+            "areaDestinoCFE" : "CFE",
+            "cantidad" : 400,
+            "unidad": "kg",
+            "importeTotal": 282055
+        },
+        {
+            "partidaContrato" : "864",
+            "descripcionAviso" : "CABLE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+            "areaDestinoCFE" : "CFE",
+            "cantidad" : 838,
+            "unidad": "kg",
+            "importeTotal": 302055
+        }
+    ],
+    "urlArchivo" : "https://www.cfe.mx",
+    "mD5": "",
+    "fechaEntregaCFE":"2025-12-18T17:25:06.51Z"
+}

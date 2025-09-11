@@ -185,6 +185,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.preparacionfabricacion.contratos.ViewContratos.Show(authResult.Value);
                 }
+                else if (contratosOptions == "Agregar contrato")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.contratos.AddContrato.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {contratosOptions}[/]");

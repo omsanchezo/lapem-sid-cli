@@ -39,4 +39,39 @@ public class ContratosRepository(AuthResult auth)
             return Result.Fail<List<Contrato>>(ex.Message);
         }
     }
+
+    public Result<Contrato> Create(string request)
+    {
+        try
+        {
+            using var httpClient = new HttpClient();
+            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/Contratos";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PostAsync(url, content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<Contrato>($"Error al crear contrato: {errorContent}");
+            }
+
+            var responseBody = response.Content.ReadAsStringAsync().Result;
+            var contratoCreado = Newtonsoft.Json.JsonConvert.DeserializeObject<Contrato>(request);
+
+            if (contratoCreado == null)
+            {
+                return Result.Fail<Contrato>("No se pudo deserializar la respuesta del servidor");
+            }
+
+            return Result.Ok(contratoCreado);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Contrato>(ex.Message);
+        }
+    }
 }

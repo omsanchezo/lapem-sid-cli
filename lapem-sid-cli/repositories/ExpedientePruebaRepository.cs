@@ -70,4 +70,45 @@ public class ExpedientePruebaRepository(AuthResult auth)
             return Result.Fail<ExpedientePrueba>(ex.Message);
         }
     }
+
+    public Result<ExpedientePrueba> Create(string request)
+    {
+        try
+        {
+
+            var createExpedienteCommand = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateExpediente>(request);
+            if (createExpedienteCommand == null)
+                return Result.Fail<ExpedientePrueba>("No se pudo deserializar el expediente de prueba creado");
+
+            // Verifica que existe la orden de fabricación asociada
+            // var ordenRepo = new OrdenFabricacionRepository(_auth);
+            // var ordenResult = ordenRepo.GetById(createExpedienteCommand.OrdenFabricacion ?? string.Empty);
+            // if (ordenResult.IsFailed)
+            // {
+            //     return Result.Fail<ExpedientePrueba>($"La orden de fabricación no existe: {ordenResult.Errors.First().Message}");
+            // }
+
+            using var httpClient = new HttpClient();
+            var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F2_PreparacionFabricacion/ExpedientePruebas";
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_auth.Token}");
+            httpClient.DefaultRequestHeaders.Add("accept", "*/*");
+
+            var content = new StringContent(request, System.Text.Encoding.UTF8, "application/json");
+
+            var response = httpClient.PostAsync(url, content).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = response.Content.ReadAsStringAsync().Result;
+                return Result.Fail<ExpedientePrueba>($"Error al crear expediente de prueba: {errorContent}");
+            }
+
+            var expedienteCreado = new ExpedientePrueba();
+            return Result.Ok(expedienteCreado);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<ExpedientePrueba>(ex.Message);
+        }
+    }
 }

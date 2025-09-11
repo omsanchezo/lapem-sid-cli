@@ -231,6 +231,10 @@ if (authResult.IsSuccess)
                 {
                     lapem_sid_cli.features.preparacionfabricacion.expedientesprueba.ViewExpedienteByValue.Show(authResult.Value);
                 }
+                else if (expedientesOption == "Agregar expediente de prueba")
+                {
+                    lapem_sid_cli.features.preparacionfabricacion.expedientesprueba.AddExpedientePrueba.Show(authResult.Value);
+                }
                 else
                 {
                     AnsiConsole.MarkupLine($"[italic]Seleccionaste: {expedientesOption}[/]");

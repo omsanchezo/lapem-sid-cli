@@ -1,0 +1,12 @@
+{
+  "id": "",
+  "claveExpediente": "FGW-2025-00123",
+  "ordenFabricacion": "68c310105006ea401208393d",
+  "cantidadMuestras": 3,
+  "maximoRechazos": 0,
+  "muestras": [
+    "M-00123-01",
+    "M-00123-02",
+    "M-00123-03"
+  ]
+}

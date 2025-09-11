@@ -62,6 +62,47 @@ public class ProductosRepository(AuthResult auth)
     {
         try
         {
+
+            var createProductCommand = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateProduct>(request);
+            if (createProductCommand == null)
+                return Result.Fail<Producto>("Error al deserializar el comando de creación de producto.");
+
+            // Verifica la existencia de la norma asociada
+            if (createProductCommand.Norma != null && !string.IsNullOrEmpty(createProductCommand.Norma))
+            {
+                var normasRepo = new NormasRepository(_auth);
+                var normaResult = normasRepo.GetById(createProductCommand.Norma);
+                if (normaResult.IsFailed)
+                {
+                    return Result.Fail<Producto>($"No se encontró la norma con Id: {createProductCommand.Norma}");
+                }
+            }
+
+            // Verifica la existencia del prototipo asociado
+            if (createProductCommand.Prototipo != null && !string.IsNullOrEmpty(createProductCommand.Prototipo))
+            {
+                var prototiposRepo = new PrototiposRepository(_auth);
+                var prototipoResult = prototiposRepo.GetById(createProductCommand.Prototipo);
+                if (prototipoResult.IsFailed)
+                {
+                    return Result.Fail<Producto>($"No se encontró el prototipo con Id: {createProductCommand.Prototipo}");
+                }
+            }
+
+            // Verifica la existencia de las pruebas asociadas
+            if (createProductCommand.Pruebas != null && createProductCommand.Pruebas.Count > 0)
+            {
+                var pruebasRepo = new PruebasRepository(_auth);
+                foreach (var pruebaId in createProductCommand.Pruebas)
+                {
+                    var pruebaResult = pruebasRepo.GetById(pruebaId);
+                    if (pruebaResult.IsFailed)
+                    {
+                        return Result.Fail<Producto>($"No se encontró la prueba con Id: {pruebaId}");
+                    }
+                }
+            }
+
             using var httpClient = new HttpClient();
             var url = "https://lapem.cfe.gob.mx/sid_capacitacion/F1_ConfiguracionInicial/Producto";
 

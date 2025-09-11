@@ -34,6 +34,30 @@ public class PrototiposRepository(AuthResult auth)
         }
     }
 
+    public Result<Prototipo> GetById(string id)
+    {
+        try
+        {
+            var allPrototipos = this.GetAll();
+            if (allPrototipos.IsFailed)
+            {
+                return Result.Fail<Prototipo>(allPrototipos.Errors.First().Message);
+            }
+
+            var prototipo = allPrototipos.Value.FirstOrDefault(p => p.Id == id);
+            if (prototipo == null)
+            {
+                return Result.Fail<Prototipo>("Prototipo no encontrado.");
+            }
+
+            return Result.Ok(prototipo);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Prototipo>(ex.Message);
+        }
+    }
+
     public Result<Prototipo> Create(string request)
     {
         try

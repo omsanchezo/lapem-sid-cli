@@ -1,0 +1,17 @@
+{
+    "id": "",
+    "codigoFabricante": "CCSD-002",
+    "descripcion": "CABLE DE COBRE SEMIDURO DESNUDO CCN 1/0 AWG 7H",
+    "descripcionCorta": "CABLE CU 1/0",
+    "tipoFabricacion": "LOTE",
+    "unidad": "m",
+    "norma": "68c2f0505006ea401208381d",
+    "prototipo": "68c2f0cf5006ea401208381e",
+    "estatus": "ACTIVO",
+    "fechaRegistro": "2025-09-09T18:09:29.066Z",
+    "pruebas": [
+      "68c2f2235006ea4012083825",
+      "68c2f2285006ea4012083826",
+      "68c2f2165006ea4012083823"
+    ]
+  }

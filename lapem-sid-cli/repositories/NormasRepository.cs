@@ -34,6 +34,30 @@ public class NormasRepository(AuthResult auth)
         }
     }
 
+    public Result<Norma> GetById(string id)
+    {
+        try
+        {
+            var allNormas = this.GetAll();
+            if (allNormas.IsFailed)
+            {
+                return Result.Fail<Norma>(allNormas.Errors.First().Message);
+            }
+
+            var norma = allNormas.Value.FirstOrDefault(n => n.Id == id);
+            if (norma == null)
+            {
+                return Result.Fail<Norma>("Norma no encontrada.");
+            }
+
+            return Result.Ok(norma);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<Norma>(ex.Message);
+        }
+    }
+
     public Result<Norma> Create(string request)
     {
         try

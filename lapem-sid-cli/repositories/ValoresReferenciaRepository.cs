@@ -24,8 +24,33 @@ public class ValoresReferenciaRepository(AuthResult auth)
             }
 
             var responseBody = response.Content.ReadAsStringAsync().Result;
-            var valoresReferencia = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ValorReferencia>>(responseBody);
-            return Result.Ok(valoresReferencia ?? new List<ValorReferencia>());
+            var valores = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ValorReferencia>>(responseBody);
+
+            // Cargar las relaciones
+            foreach (var valor in valores ?? [])
+            {
+                if (!string.IsNullOrEmpty(valor.IdProducto))
+                {
+                    var productosRepo = new ProductosRepository(_auth);
+                    var productoResult = productosRepo.GetById(valor.IdProducto);
+                    if (productoResult.IsSuccess)
+                    {
+                        valor.Producto = productoResult.Value;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(valor.IdPrueba))
+                {
+                    var pruebasRepo = new PruebasRepository(_auth);
+                    var pruebaResult = pruebasRepo.GetById(valor.IdPrueba);
+                    if (pruebaResult.IsSuccess)
+                    {
+                        valor.Prueba = pruebaResult.Value;
+                    }
+                }
+            }
+
+            return Result.Ok(valores ?? new List<ValorReferencia>());
         }
         catch (Exception ex)
         {

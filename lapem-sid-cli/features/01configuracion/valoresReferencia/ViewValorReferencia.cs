@@ -12,7 +12,7 @@ public class ViewValorReferencia(AuthResult auth)
 
     public static void Show(AuthResult auth)
     {
-        var repo = new ValoresRefenciaRepository(auth);
+        var repo = new ValoresReferenciaRepository(auth);
         var result = repo.GetAll();
         if (result.IsFailed)
         {
